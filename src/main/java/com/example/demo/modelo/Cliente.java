@@ -2,12 +2,27 @@ package com.example.demo.modelo;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="cliente")
 public class Cliente {
+	
+	@Id
+	@Column(name="clie_cedula")
 	private String cedula;
+	@Column(name="clie_nombre")
 	private String nombre;
+	@Column(name="clie_apellido")
 	private String apellido;
+	@Column(name="clie_fecha_nacimiento")
 	private LocalDateTime fechaNacimiento;
+	@Column(name="clie_registro")
 	private String registro;
+	@Column(name="clie_telefono")
 	private String telefono;
 	
 	//SET Y GET

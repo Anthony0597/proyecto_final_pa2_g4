@@ -3,15 +3,33 @@ package com.example.demo.modelo;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="vehiculo")
 public class Vehiculo {
+	
+	@Id
+	@Column(name="vehi_placa")
 	private String placa;
+	@Column(name="vehi_modelo")
 	private String modelo;
+	@Column(name="vehi_marca")
 	private String marca;
+	@Column(name="vehi_anio_fabricacion")
 	private LocalDateTime anioFabricacion;//preguntar
+	@Column(name="vehi_pais")
 	private String pais;
+	@Column(name="vehi_cilindraje")
 	private String cilindraje;
+	@Column(name="vehi_avaluo")
 	private BigDecimal avaluo;
+	@Column(name="vehi_valor_dia")
 	private BigDecimal valorDia;
+	@Column(name="vehi_numero_puertas")
 	private String numeroPuertas;//preguntar
 	
 	//SET Y GET
