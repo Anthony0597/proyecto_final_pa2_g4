@@ -6,8 +6,8 @@ public interface IClienteRepo {
 	
 	public void  insertar(Cliente cliente);
 	public void actualizar(Cliente cliente);
-	public Cliente buscarApellido(String apellido);
-	public void eliminar(Integer id);
+	public Cliente buscar(String cedula);
+	public void eliminar(String cedula);
 	
-
+	public Cliente buscarApellido(String apellido);
 }

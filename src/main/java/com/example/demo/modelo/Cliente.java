@@ -1,10 +1,12 @@
 package com.example.demo.modelo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +26,17 @@ public class Cliente {
 	private String registro;
 	@Column(name="clie_telefono")
 	private String telefono;
+	@Column(name="clie_tipo")
+	private String tipo;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Reserva> reservas;
+	
+	@Override
+	public String toString() {
+		return "Cliente [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
+				+ fechaNacimiento + ", registro=" + registro + ", telefono=" + telefono + ", tipo=" + tipo + "]";
+	}
 	
 	//SET Y GET
 	public String getCedula() {
@@ -62,11 +75,20 @@ public class Cliente {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	@Override
-	public String toString() {
-		return "Cliente [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
-				+ fechaNacimiento + ", registro=" + registro + ", telefono=" + telefono + "]";
+	
+	public List<Reserva> getReservas() {
+		return reservas;
 	}
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 	
 	
 }

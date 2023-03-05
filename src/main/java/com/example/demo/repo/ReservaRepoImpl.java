@@ -2,46 +2,41 @@ package com.example.demo.repo;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.modelo.Cliente;
+import com.example.demo.modelo.Reserva;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+
 @Repository
 @Transactional
-public class ClienteRepoImpl implements IClienteRepo {
+public class ReservaRepoImpl implements IReservaRepo {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
-	public void insertar(Cliente cliente) {
+	public void insertar(Reserva reserva) {
 		// TODO Auto-generated method stub
-		this.entityManager.persist(cliente);
+		this.entityManager.persist(reserva);
 	}
 
 	@Override
-	public void actualizar(Cliente cliente) {
+	public void actualizar(Reserva reserva) {
 		// TODO Auto-generated method stub
-
+		this.entityManager.merge(reserva);
 	}
 
 	@Override
-	public Cliente buscarApellido(String apellido) {
+	public Reserva buscar(Integer numero) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.entityManager.find(Reserva.class, numero);
 	}
 
 	@Override
-	public void eliminar(String cedula) {
+	public void eliminar(Integer numero) {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Cliente buscar(String cedula) {
-		// TODO Auto-generated method stub
-		return this.entityManager.find(Cliente.class, cedula);
+		this.entityManager.remove(this.buscar(numero));
 	}
 
 }

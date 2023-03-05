@@ -2,10 +2,12 @@ package com.example.demo.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,8 +21,8 @@ public class Vehiculo {
 	private String modelo;
 	@Column(name="vehi_marca")
 	private String marca;
-	@Column(name="vehi_anio_fabricacion")
-	private LocalDateTime anioFabricacion;//preguntar
+	@Column(name="vehi_anio")
+	private String anio;//preguntar
 	@Column(name="vehi_pais")
 	private String pais;
 	@Column(name="vehi_cilindraje")
@@ -31,6 +33,12 @@ public class Vehiculo {
 	private BigDecimal valorDia;
 	@Column(name="vehi_numero_puertas")
 	private String numeroPuertas;//preguntar
+	@Column(name="vehi_estado")
+	private String estado;//preguntar
+	
+	@OneToMany(mappedBy = "vehiculo")
+	private List<Reserva> reservas;
+	
 	
 	//SET Y GET
 	public String getPlaca() {
@@ -51,11 +59,11 @@ public class Vehiculo {
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
-	public LocalDateTime getAnioFabricacion() {
-		return anioFabricacion;
+	public String getAnio() {
+		return anio;
 	}
-	public void setAnioFabricacion(LocalDateTime anioFabricacion) {
-		this.anioFabricacion = anioFabricacion;
+	public void setAnio(String anio) {
+		this.anio = anio;
 	}
 	public String getPais() {
 		return pais;
@@ -87,13 +95,27 @@ public class Vehiculo {
 	public void setNumeroPuertas(String numeroPuertas) {
 		this.numeroPuertas = numeroPuertas;
 	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
 	@Override
 	public String toString() {
 		return "Vehiculo [placa=" + placa + ", modelo=" + modelo + ", marca=" + marca + ", anioFabricacion="
-				+ anioFabricacion + ", pais=" + pais + ", cilindraje=" + cilindraje + ", avaluo=" + avaluo
+				+ anio + ", pais=" + pais + ", cilindraje=" + cilindraje + ", avaluo=" + avaluo
 				+ ", valorDia=" + valorDia + ", numeroPuertas=" + numeroPuertas + "]";
 	}
 	
 		
+	
+	
 	
 }
