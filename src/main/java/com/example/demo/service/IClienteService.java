@@ -10,11 +10,13 @@ public interface IClienteService {
 	public Cliente buscar(String cedula);
 	public void registrarse(Cliente cliente);
 	public void actualizarDatos(Cliente cliente);
+
 	public void eliminar(String cedula);
 	
 	public List<ClienteDTO> buscarPorApellido(String apellido);
 	
 	public List<Cliente> reporte();
+
 
 	
 }
