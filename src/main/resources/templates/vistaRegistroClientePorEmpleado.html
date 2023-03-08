@@ -11,7 +11,7 @@
 </head>
 
 <body>
-	<form th:action="@{/clientes/insertar}" th:object="${cliente}" th:method="POST">
+	<form th:action="@{/empleados/insertar}" th:object="${cliente}" th:method="POST">
 		<table>
 			<tr>
 				<td>
@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td>
-					<label>Apellido:</label>
+					<label>Aellido:</label>
 				</td>
 				<td>
 					<input type="text" id="apellido" th:field="${cliente.apellido}">

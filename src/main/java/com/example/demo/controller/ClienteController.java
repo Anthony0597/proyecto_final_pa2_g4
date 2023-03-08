@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.modelo.Cliente;
+import com.example.demo.modelo.Vehiculo;
+import com.example.demo.modelo.VehiculoDTO;
 import com.example.demo.service.IClienteService;
+import com.example.demo.service.IVehiculoService;
 
 @Controller
 @RequestMapping("/clientes")
@@ -22,15 +25,17 @@ public class ClienteController {
 
 	@Autowired
 	private IClienteService clienteService;
+	@Autowired
+	private IVehiculoService iVehiculoService;
+
+	@GetMapping("/principal")
+	public String principalCliente(Cliente cliente) {
+		return "Cliente";
+	}
 
 	@GetMapping("/registroCliente")
 	public String registroCliente(Cliente cliente) {
 		return "vistaRegistroCliente";
-	}
-
-	@GetMapping("/principal")
-	public String principalCliente(Cliente cliente) {
-		return "vistaPrincipalCliente";
 	}
 
 	@PostMapping("/insertar")
@@ -44,37 +49,24 @@ public class ClienteController {
 	public String actualizarCliente(Cliente cliente) {
 		return "vistaActualizarCliente";
 	}
-
-	@GetMapping("/pruebas")
-	public String pruebasCliente(Model modelo) {
-		List<Cliente> clientes = new ArrayList<>();
-		Cliente clie = new Cliente();
-		clie.setCedula("54651");
-		clie.setApellido("a");
-		clie.setNombre("a");
-		clie.setGenero("a");
-		clientes.add(clie);
-		modelo.addAttribute("clientes", clientes);
-		return "vistaMostrarCliente";
-	}
-
-	@GetMapping("/visualizar")
-	public String mostrarCliente(Model modelo) {
-		// List<Cliente> clientes = this.clienteService.buscar();
-		List<Cliente> clientes = new ArrayList<>();
-		Cliente clie = new Cliente();
-		clie.setCedula("54651");
-		clie.setApellido("a");
-		clie.setNombre("a");
-		clie.setGenero("a");
-		clientes.add(clie);
-		modelo.addAttribute("clientes", clientes);
-		return "vistaMostrarCliente";
-	}
-
+	
 	@DeleteMapping("/borrar/{ape}")
 	public String eliminarCliente(@PathVariable("ape") String apellido) {
 		// this.clienteService.borrarApellido(apellido);
 		return "redirect:/clientes/visualizar";
 	}
+
+	@GetMapping("/vehiculoDisponible")
+	public String buscarVehiculo(VehiculoDTO vehiculo) {
+		return "vistaVehiculosDisponibles";
+	}
+	
+	@GetMapping("/buscarDisponible/{mar} & {mod}")
+	public String buscarVehiculo(@PathVariable("mar") String marca, @PathVariable("mod") String modelo,
+			Model model) {
+		List<VehiculoDTO> vehiculos = this.iVehiculoService.buscarVehiculosDisponiblres(marca, modelo);
+		model.addAttribute("vehiculos", vehiculos);
+		return "redirect:/clientes/vistaVehiculosDisponibles";
+	}
+
 }
