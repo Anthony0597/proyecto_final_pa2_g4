@@ -1,6 +1,9 @@
 package com.example.demo.repo;
 
+import java.util.List;
+
 import com.example.demo.modelo.Cliente;
+import com.example.demo.modelo.ClienteDTO;
 
 public interface IClienteRepo {
 	
@@ -9,5 +12,7 @@ public interface IClienteRepo {
 	public Cliente buscar(String cedula);
 	public void eliminar(String cedula);
 	
-	public Cliente buscarApellido(String apellido);
+	public List<ClienteDTO> buscarApellido(String apellido);
+	
+	public List<Cliente> reporte();
 }

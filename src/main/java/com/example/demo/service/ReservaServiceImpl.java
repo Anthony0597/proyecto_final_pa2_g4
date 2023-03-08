@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class ReservaServiceImpl implements IReservaService {
 		Cliente cliente= this.clienteRepo.buscar(cedula);
 		Vehiculo vehiculo = this.iVehiculoRepo.buscar(placa);
 		
+		//cambio de estado del vehiculo (NO DISPONIBLE)
+		vehiculo.setEstado("ND");
+		
 		reserva.setCliente(cliente);
 		reserva.setVehiculo(vehiculo);
 		// calculo subtotal
@@ -39,8 +43,10 @@ public class ReservaServiceImpl implements IReservaService {
 		BigDecimal valorIva= subtotal.multiply(new BigDecimal(0.12));
 		reserva.setIva(valorIva);
 		// calculo total
-		reserva.setValortotal(subtotal.add(valorIva));
-		reserva.setEstado("Generada");
+		reserva.setValorTotal(subtotal.add(valorIva));
+		// reserva Generada (G) 
+		reserva.setEstado("G");
+		this.iReservaRepo.insertar(reserva);
 		
 	}
 	
@@ -61,6 +67,32 @@ public class ReservaServiceImpl implements IReservaService {
 		numDia = Math.abs((fechaFin.getDayOfYear() - fechaInicio.getDayOfYear()) + 1);
 		}
 		return numDia;
+	}
+
+	@Override
+	public Reserva retirarVehiculoReservado(Integer numero) {
+		// TODO Auto-generated method stub
+		Reserva reserva = this.iReservaRepo.buscar(numero);
+		if(reserva.getEstado().equals("G")) {
+			//VEHICULO: Cambio de estado(No disponible "ND")
+			Vehiculo vehiculo= reserva.getVehiculo();
+			vehiculo.setEstado("ND"); // D -> ND
+			this.iVehiculoRepo.actualizar(vehiculo);
+			
+			//RESERVA: Cambio de estado(En ejecucion "E")
+			reserva.setEstado("E"); // G -> E
+			this.iReservaRepo.actualizar(reserva);
+		}else {
+			System.out.println("El vehiculo no ha sido reservado");
+		}
+		
+		return reserva;
+	}
+
+	@Override
+	public List<Reserva> reporte(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+		// TODO Auto-generated method stub
+		return this.iReservaRepo.buscarReporte(fechaInicio, fechaFin);
 	}
 
 }
