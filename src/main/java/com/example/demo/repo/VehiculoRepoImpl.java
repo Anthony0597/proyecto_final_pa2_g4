@@ -21,7 +21,7 @@ public class VehiculoRepoImpl implements IVehiculoRepo {
 	private EntityManager entityManager;
 
 	@Override
-	public void inserta(Vehiculo vehiculo) {
+	public void insertar(Vehiculo vehiculo) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(vehiculo);
 	}
@@ -43,12 +43,14 @@ public class VehiculoRepoImpl implements IVehiculoRepo {
 		// TODO Auto-generated method stub
 		this.entityManager.remove(this.buscar(placa));
 	}
-	
+
 	@Override
-	public List<Vehiculo> buscarMarca(String marca) {
+	public List<VehiculoDTO> buscarMarca(String marca) {
 		// TODO Auto-generated method stub
-		TypedQuery<Vehiculo> query = this.entityManager.createQuery("select v from Vehiculo v where v.Marca=:datoMarca", Vehiculo.class);
-		query.setParameter("datoMarca",	marca);
+		TypedQuery<VehiculoDTO> query = this.entityManager.createQuery(
+				"select new com.example.demo.modelo.VehiculoDTO(v.placa, v.modelo, v.marca, v.anio, v.valorDia, v.estado) from Vehiculo v where v.marca=:datoMarca",
+				VehiculoDTO.class);
+		query.setParameter("datoMarca", marca);
 		return query.getResultList();
 	}
 
@@ -62,7 +64,5 @@ public class VehiculoRepoImpl implements IVehiculoRepo {
 		query.setParameter("datoModelo", modelo);
 		return query.getResultList();
 	}
-
-	
 
 }
