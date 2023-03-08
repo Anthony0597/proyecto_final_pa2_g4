@@ -12,62 +12,67 @@
 
 <body>
 	<form th:action="@{/clientes/insertar}" th:object="${cliente}" th:method="POST">
-		<table>
-			<tr>
-				<td>
-					<label>Cedula:</label>
-				</td>
-				<td>
-					<input type="text" id="cedula" th:field="${cliente.cedula}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>Nombre:</label>
-				</td>
-				<td>
-					<input type="text" id="nombre" th:field="${cliente.nombre}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>Aellido:</label>
-				</td>
-				<td>
-					<input type="text" id="apellido" th:field="${cliente.apellido}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>Fecha de Nacimiento:</label>
-				</td>
-				<td>
-					<input type="text" id="fechaNacimiento" th:field="${cliente.fechaNacimiento}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>Genero:</label>
-				</td>
-				<td>
-					<input type="text" id="genero" th:field="${cliente.genero}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>Registro:</label>
-				</td>
-				<td>
-					<input type="text" id="registro" th:field="${cliente.registro}">
-				</td>
-			</tr>
-			<tr>
-			<td>
+	  <table>
+		<tr>
+		  <td>
+			<label>Cedula:</label>
+		  </td>
+		  <td>
+			<input type="text" id="cedula" th:field="${cliente.cedula}">
+		  </td>
+		</tr>
+		
+		<tr>
+		  <td>
+		    <label>Nombre:</label>
+		  </td>
+		  <td>
+		    <input type="text" id="nombre" th:field="${cliente.nombre}">
+		  </td>
+		</tr>
+		
+		<tr>
+		  <td>
+			<label>Aellido:</label>
+		  </td>
+		  <td>
+			<input type="text" id="apellido" th:field="${cliente.apellido}">
+		  </td>
+		</tr>
+		
+		<tr>
+		  <td>
+			<label>Fecha de Nacimiento:</label>
+		  </td>
+		  <td>
+			<input type="text" id="fechaNacimiento" th:field="${cliente.fechaNacimiento}">
+		  </td>
+		</tr>
+		
+		<tr>
+		  <td>
+		    <label>Genero:</label>
+		  </td>
+		  <td>
+			<input type="text" id="genero" th:field="${cliente.genero}">
+		  </td>
+		</tr>
+		
+		<tr>
+		  <td>
+			<label>Registro:</label>
+		  </td>
+		  <td>
+			<input type="text" id="registro" th:field="${cliente.registro}">
+		  </td>
+		</tr>
+		
+		<tr>
+		  <td>
 			<input type="submit" value="Registrar">
-			</td>
-			</tr>
+		  </td>
+		</tr>
 		</table>
 	</form>
 </body>
-
 </html>
