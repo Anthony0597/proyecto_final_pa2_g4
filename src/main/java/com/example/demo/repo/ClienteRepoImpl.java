@@ -57,8 +57,12 @@ public class ClienteRepoImpl implements IClienteRepo {
 	public List<Cliente> reporte() {
 		// TODO Auto-generated method stub
 		TypedQuery<Cliente> query = this.entityManager.createQuery(
-				"SELECT c FROM Cliente c FETCH JOIN c.reservas r ORDER BY r.valorTotal DESC", Cliente.class);
-		return query.getResultList();
+				"SELECT c FROM Cliente c RIGHT JOIN c.reservas r ORDER BY r.valorTotal DESC", Cliente.class);
+		List<Cliente> clientes = query.getResultList();
+		for(Cliente c: clientes) {
+			c.getReservas().size();
+		}
+		return clientes;
 	}
 
 }

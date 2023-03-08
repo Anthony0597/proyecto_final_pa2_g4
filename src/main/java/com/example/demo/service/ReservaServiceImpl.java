@@ -31,22 +31,29 @@ public class ReservaServiceImpl implements IReservaService {
 		Cliente cliente= this.clienteRepo.buscar(cedula);
 		Vehiculo vehiculo = this.iVehiculoRepo.buscar(placa);
 		
-		//cambio de estado del vehiculo (NO DISPONIBLE)
-		vehiculo.setEstado("ND");
+		reserva.setFecha(LocalDateTime.now());
+		if(!vehiculo.getEstado().equals("ND")) {
+			//cambio de estado del vehiculo (NO DISPONIBLE)
+			vehiculo.setEstado("ND");
+			this.iVehiculoRepo.actualizar(vehiculo);
+			
+			reserva.setCliente(cliente);
+			reserva.setVehiculo(vehiculo);
+			// calculo subtotal
+			BigDecimal subtotal= vehiculo.getValorDia().multiply(new BigDecimal(calcularDias(fechaInicio, fechaFin)));
+			reserva.setValorSubtotal(subtotal);
+			// calculo iva
+			BigDecimal valorIva= subtotal.multiply(new BigDecimal(0.12));
+			reserva.setIva(valorIva);
+			// calculo total
+			reserva.setValorTotal(subtotal.add(valorIva));
+			// reserva Generada (G) 
+			reserva.setEstado("G");
+			this.iReservaRepo.insertar(reserva);
+		}else {
+			System.out.println("Ya existe una reserva, el vehículo no se encuentra disponible !");
+		}
 		
-		reserva.setCliente(cliente);
-		reserva.setVehiculo(vehiculo);
-		// calculo subtotal
-		BigDecimal subtotal= vehiculo.getValorDia().multiply(new BigDecimal(calcularDias(fechaInicio, fechaFin)));
-		reserva.setValorSubtotal(subtotal);
-		// calculo iva
-		BigDecimal valorIva= subtotal.multiply(new BigDecimal(0.12));
-		reserva.setIva(valorIva);
-		// calculo total
-		reserva.setValorTotal(subtotal.add(valorIva));
-		// reserva Generada (G) 
-		reserva.setEstado("G");
-		this.iReservaRepo.insertar(reserva);
 		
 	}
 	

@@ -46,9 +46,11 @@ public class ReservaRepoImpl implements IReservaRepo {
 	@Override
 	public List<Reserva> buscarReporte(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
 		// TODO Auto-generated method stub
-		TypedQuery<Reserva> query = this.entityManager.createQuery("SELECT r FROM Reserva r FETCH JOIN r.cliente c",
+		TypedQuery<Reserva> query = this.entityManager.createQuery(
+				"SELECT r FROM Reserva r LEFT JOIN r.cliente c WHERE r.fecha BETWEEN :datoInicio AND :datoFinal",
 				Reserva.class);
-		
+		query.setParameter("datoInicio", fechaInicio);
+		query.setParameter("datoFinal", fechaFin);
 		return query.getResultList();
 	}
 

@@ -1,7 +1,7 @@
 package com.example.demo.modelo;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -31,6 +30,8 @@ public class Reserva {
 	private BigDecimal iva;
 	@Column(name="rese_valor_total")
 	private BigDecimal valorTotal;
+	@Column(name="rese_fecha")
+	private LocalDateTime fecha;
 	
 	@ManyToOne
 	@JoinColumn(name = "rese_cedula_cliente")
@@ -103,6 +104,14 @@ public class Reserva {
 		this.vehiculo = vehiculo;
 	}
 
+	public LocalDateTime getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
+	}
+	
 	
 	
 

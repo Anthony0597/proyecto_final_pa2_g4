@@ -22,34 +22,33 @@ public class ClienteController {
 
 	@Autowired
 	private IClienteService clienteService;
-	
+
 	@GetMapping("/registroCliente")
 	public String registroCliente(Cliente cliente) {
 		return "vistaRegistroCliente";
 	}
-	
-	
+
 	@GetMapping("/principal")
 	public String principalCliente(Cliente cliente) {
 		return "vistaPrincipalCliente";
 	}
-	
+
 	@PostMapping("/insertar")
 	public String insertarCliente(Cliente cliente) {
 		cliente.setRegistro("C");
 		this.clienteService.registrarse(cliente);
 		return "redirect:/clientes/registroCliente";
 	}
-	
+
 	@GetMapping("/actualizar")
 	public String actualizarCliente(Cliente cliente) {
 		return "vistaActualizarCliente";
 	}
-	
+
 	@GetMapping("/pruebas")
 	public String pruebasCliente(Model modelo) {
 		List<Cliente> clientes = new ArrayList<>();
-		Cliente clie =new Cliente();
+		Cliente clie = new Cliente();
 		clie.setCedula("54651");
 		clie.setApellido("a");
 		clie.setNombre("a");
@@ -58,12 +57,12 @@ public class ClienteController {
 		modelo.addAttribute("clientes", clientes);
 		return "vistaMostrarCliente";
 	}
-	
+
 	@GetMapping("/visualizar")
 	public String mostrarCliente(Model modelo) {
-		//List<Cliente> clientes = this.clienteService.buscar(); 
+		// List<Cliente> clientes = this.clienteService.buscar();
 		List<Cliente> clientes = new ArrayList<>();
-		Cliente clie =new Cliente();
+		Cliente clie = new Cliente();
 		clie.setCedula("54651");
 		clie.setApellido("a");
 		clie.setNombre("a");
@@ -72,10 +71,10 @@ public class ClienteController {
 		modelo.addAttribute("clientes", clientes);
 		return "vistaMostrarCliente";
 	}
-	
+
 	@DeleteMapping("/borrar/{ape}")
-	public String eliminarCliente(@PathVariable("ape")String apellido) {
-		//this.clienteService.borrarApellido(apellido);
+	public String eliminarCliente(@PathVariable("ape") String apellido) {
+		// this.clienteService.borrarApellido(apellido);
 		return "redirect:/clientes/visualizar";
 	}
 }

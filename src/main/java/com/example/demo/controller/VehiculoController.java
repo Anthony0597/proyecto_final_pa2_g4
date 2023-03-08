@@ -11,32 +11,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.modelo.Cliente;
 import com.example.demo.service.IClienteService;
 
-
 @Controller
 @RequestMapping("/empleados")
 public class VehiculoController {
 
 	@Autowired
 	private IClienteService clienteService;
-	
+
 	@GetMapping("/registroClientPorEmpl")
 	public String registroCliente(Cliente cliente) {
 		return "vistaRegistroEmpleado";
 	}
-	
+
 	@PostMapping("/insertar")
 	public String insertarCliente(Cliente cliente) {
 		cliente.setRegistro("E");
 		this.clienteService.registrarse(cliente);
 		return "redirect:/empleados/registroClientPorEmpl";
 	}
-	
-	  @PutMapping("/actualizar/{ced}")
-		public String actualizar(@PathVariable("ced") String cedula, Cliente cliente){
-			cliente.setCedula(cedula);
-			this.clienteService.actualizarDatos(cliente);
-			return "redirect:/empleados/buscar";
-		}
-	
-	
+
+	@PutMapping("/actualizar/{ced}")
+	public String actualizar(@PathVariable("ced") String cedula, Cliente cliente) {
+		cliente.setCedula(cedula);
+		this.clienteService.actualizarDatos(cliente);
+		return "redirect:/empleados/buscar";
+	}
+
 }
