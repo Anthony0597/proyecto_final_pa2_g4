@@ -29,6 +29,8 @@ public class Cliente {
 	private String registro;
 	@Column(name="clie_genero")
 	private String genero;
+	@Column(name="clie_tipo")
+	private String tipo;
 	
 	@OneToMany(mappedBy = "cliente")
 	private List<Reserva> reservas;
@@ -36,7 +38,7 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "Cliente [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
-				+ fechaNacimiento + ", registro=" + registro + ", genero=" + genero + "]";
+				+ fechaNacimiento + ", registro=" + registro + ", genero=" + genero + ", tipo=" + tipo + "]";
 	}
 	
 	//SET Y GET
@@ -84,6 +86,14 @@ public class Cliente {
 	}
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	

@@ -20,4 +20,34 @@ public class VehiculoServiceImpl implements IVehiculoService {
 		return this.iVehiculoRepo.buscarMarcaModelo(marca, modelo);
 	}
 
+	@Override
+	public void ingresar(Vehiculo vehiculo) {
+		// TODO Auto-generated method stub
+		this.iVehiculoRepo.insertar(vehiculo);
+	}
+
+	@Override
+	public List<VehiculoDTO> buscarPorMarca(String marca) {
+		// TODO Auto-generated method stub
+		return this.iVehiculoRepo.buscarMarca(marca);
+	}
+
+	@Override
+	public Vehiculo buscar(String placa) {
+		// TODO Auto-generated method stub
+		return this.iVehiculoRepo.buscar(placa);
+	}
+
+	@Override
+	public void eliminar(String placa) {
+		// TODO Auto-generated method stub
+		this.iVehiculoRepo.eliminar(placa);
+	}
+
+	@Override
+	public void actualizar(Vehiculo vehiculo) {
+		// TODO Auto-generated method stub
+		this.iVehiculoRepo.actualizar(vehiculo);
+	}
+
 }

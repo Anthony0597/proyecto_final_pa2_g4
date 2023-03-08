@@ -1,11 +1,15 @@
 package com.example.demo.repo;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.modelo.Reserva;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -14,7 +18,7 @@ public class ReservaRepoImpl implements IReservaRepo {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	public void insertar(Reserva reserva) {
 		// TODO Auto-generated method stub
@@ -37,6 +41,15 @@ public class ReservaRepoImpl implements IReservaRepo {
 	public void eliminar(Integer numero) {
 		// TODO Auto-generated method stub
 		this.entityManager.remove(this.buscar(numero));
+	}
+
+	@Override
+	public List<Reserva> buscarReporte(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+		// TODO Auto-generated method stub
+		TypedQuery<Reserva> query = this.entityManager.createQuery("SELECT r FROM Reserva r FETCH JOIN r.cliente c",
+				Reserva.class);
+		
+		return query.getResultList();
 	}
 
 }
