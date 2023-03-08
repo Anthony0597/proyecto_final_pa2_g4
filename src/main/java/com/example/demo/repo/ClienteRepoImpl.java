@@ -1,19 +1,24 @@
 package com.example.demo.repo;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.modelo.Cliente;
+import com.example.demo.modelo.ClienteDTO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+
 @Repository
 @Transactional
 public class ClienteRepoImpl implements IClienteRepo {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	public void insertar(Cliente cliente) {
 		// TODO Auto-generated method stub
@@ -27,9 +32,9 @@ public class ClienteRepoImpl implements IClienteRepo {
 	}
 
 	@Override
-	public Cliente buscarApellido(String apellido) {
+	public Cliente buscar(String cedula) {
 		// TODO Auto-generated method stub
-		return this.entityManager.find(Cliente.class, apellido);
+		return this.entityManager.find(Cliente.class, cedula);
 	}
 
 	@Override
@@ -39,9 +44,21 @@ public class ClienteRepoImpl implements IClienteRepo {
 	}
 
 	@Override
-	public Cliente buscar(String cedula) {
+	public List<ClienteDTO> buscarApellido(String apellido) {
 		// TODO Auto-generated method stub
-		return this.entityManager.find(Cliente.class, cedula);
+		TypedQuery<ClienteDTO> query = this.entityManager.createQuery(
+				"select new com.example.demo.modelo.ClienteDTO(c.cedula, c.nombre, c.apellido) from Cliente c where c.apellido=:datoApellido",
+				ClienteDTO.class);
+		query.setParameter("datoApellido", apellido);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Cliente> reporte() {
+		// TODO Auto-generated method stub
+		TypedQuery<Cliente> query = this.entityManager.createQuery(
+				"SELECT c FROM Cliente c FETCH JOIN c.reservas r ORDER BY r.valorTotal DESC", Cliente.class);
+		return query.getResultList();
 	}
 
 }

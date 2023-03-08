@@ -30,7 +30,7 @@ public class Reserva {
 	@Column(name="rese_iva")
 	private BigDecimal iva;
 	@Column(name="rese_valor_total")
-	private BigDecimal valortotal;
+	private BigDecimal valorTotal;
 	
 	@ManyToOne
 	@JoinColumn(name = "rese_cedula_cliente")
@@ -43,7 +43,7 @@ public class Reserva {
 	@Override
 	public String toString() {
 		return "Reserva [numero=" + numero + ", valorSubtotal=" + valorSubtotal + ", estado=" + estado + ", iva=" + iva
-				+ ", valortotal=" + valortotal + "]";
+				+ ", valortotal=" + valorTotal + "]";
 	}
 
 	//SET Y GET
@@ -71,12 +71,12 @@ public class Reserva {
 		this.iva = iva;
 	}
 
-	public BigDecimal getValortotal() {
-		return valortotal;
+	public BigDecimal getValorTotal() {
+		return valorTotal;
 	}
 
-	public void setValortotal(BigDecimal valortotal) {
-		this.valortotal = valortotal;
+	public void setValorTotal(BigDecimal valortotal) {
+		this.valorTotal = valortotal;
 	}
 
 	public Integer getNumero() {
