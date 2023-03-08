@@ -113,8 +113,8 @@ public class ProyectoFinalPa2G4Application implements CommandLineRunner {
 //		this.iReservaService.retirarVehiculoReservado(1);
 
 		// f)
-		System.out.println("literal 2f");
-		// vistas
+//		System.out.println("literal 2f");
+//		// vistas
 		
 		// a)
 //		System.out.println("literal 3a");

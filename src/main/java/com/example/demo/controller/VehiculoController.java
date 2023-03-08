@@ -12,7 +12,7 @@ import com.example.demo.modelo.Cliente;
 import com.example.demo.service.IClienteService;
 
 @Controller
-@RequestMapping("/empleados")
+@RequestMapping("/vehiculos")
 public class VehiculoController {
 
 	@Autowired

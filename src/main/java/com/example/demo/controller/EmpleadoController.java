@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.modelo.Cliente;
 import com.example.demo.service.IClienteService;
 
-//@Controller
-//@RequestMapping("/empleados")
+@Controller
+@RequestMapping("/empleados")
 public class EmpleadoController {
 
 	@Autowired
