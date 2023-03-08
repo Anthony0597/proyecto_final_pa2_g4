@@ -57,7 +57,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/vehiculoDisponible")
-	public String buscarVehiculo(VehiculoDTO vehiculo) {
+	public String buscarVehiculo(Vehiculo vehiculo) {
 		return "vistaVehiculosDisponibles";
 	}
 	

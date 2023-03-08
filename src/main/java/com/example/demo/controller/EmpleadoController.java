@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.modelo.Cliente;
 import com.example.demo.modelo.ClienteDTO;
+import com.example.demo.modelo.Vehiculo;
 import com.example.demo.service.IClienteService;
 
 @Controller
@@ -27,6 +28,11 @@ public class EmpleadoController {
 		return "vistaRegistroClientePorEmpleado";
 	}
 
+	@GetMapping("/registroVehiculo")
+	public String registroVehiculo(Vehiculo vehiculo) {
+		return "vistaRegistroVehiculo";
+	}
+	
 	@PostMapping("/insertar")
 	public String insertarCliente(Cliente cliente) {
 		cliente.setRegistro("E");
@@ -45,6 +51,11 @@ public class EmpleadoController {
 	public String mostrarCliente(@PathVariable("apellido") String apellido, Model modelo) {
 		List<ClienteDTO> clientes = this.clienteService.buscarPorApellido(apellido);
 		modelo.addAttribute("clientes", clientes);
+		return "vistaMostrarCliente";
+	}
+	
+	@GetMapping("/buscarCliente")
+	public String buscarCliente(Cliente cliente) {
 		return "vistaMostrarCliente";
 	}
 
