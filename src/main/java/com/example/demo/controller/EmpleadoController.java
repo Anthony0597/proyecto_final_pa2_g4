@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.modelo.Cliente;
 import com.example.demo.modelo.ClienteDTO;
+import com.example.demo.modelo.Usuario;
 import com.example.demo.service.IClienteService;
+import com.example.demo.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/empleados")
@@ -21,6 +23,9 @@ public class EmpleadoController {
 
 	@Autowired
 	private IClienteService clienteService;
+	
+	@Autowired
+	private IUsuarioService usuarioService;
 
 	@GetMapping("/registroClientPorEmpl")
 	public String registroCliente(Cliente cliente) {
@@ -46,6 +51,12 @@ public class EmpleadoController {
 		List<ClienteDTO> clientes = this.clienteService.buscarPorApellido(apellido);
 		modelo.addAttribute("clientes", clientes);
 		return "vistaMostrarCliente";
+	}
+	
+	@PostMapping("/insertar")
+	public String insertar(Usuario usuario) {
+		this.usuarioService.insertar(usuario);
+		return "redirect:/usuarios/registroUsuario";
 	}
 
 }
