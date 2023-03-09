@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.modelo.Cliente;
 import com.example.demo.modelo.ClienteDTO;
+import com.example.demo.modelo.Mecanico;
 import com.example.demo.modelo.Vehiculo;
 import com.example.demo.service.IClienteService;
+import com.example.demo.service.IMecanicoService;
 
 @Controller
 @RequestMapping("/empleados")
@@ -22,10 +24,23 @@ public class EmpleadoController {
 
 	@Autowired
 	private IClienteService clienteService;
+	@Autowired
+	private IMecanicoService iMecanicoService;
 
 	@GetMapping("/registroClientPorEmpl")
 	public String registroCliente(Cliente cliente) {
 		return "vistaRegistroClientePorEmpleado";
+	}
+	
+	@GetMapping("/registroMecanico")
+	public String registroMecanico(Mecanico mecanico) {
+		return "vistaRegistrarMecanico";
+	}
+	
+	@PostMapping("/insertarMecanico")
+	public String insertarMecanico(Mecanico mecanico) {
+		this.iMecanicoService.ingresar(mecanico);
+		return "redirect:/empleados/vistaRegistrarMecanico";
 	}
 
 	@GetMapping("/registroVehiculo")
